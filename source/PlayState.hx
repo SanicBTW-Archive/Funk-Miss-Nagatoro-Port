@@ -2408,6 +2408,7 @@ class PlayState extends MusicBeatState
 		setOnLuas('cameraY', camFollowPos.y);
 		setOnLuas('botPlay', cpuControlled);
 		callOnLuas('onUpdatePost', [elapsed]);
+		onUpdatePost();
 	}
 
 	function openChartEditor()
@@ -4006,6 +4007,162 @@ class PlayState extends MusicBeatState
 			resyncVocals();
 		}
 
+		if(curStage == 'hallway')
+		{
+			switch(curStep)
+			{
+				case 0:
+					camBoomSpeed(4, 0.5);
+				case 16:
+					camBoomSpeed(1,1);
+				case 32:
+					camBoomSpeed(2,2);
+				case 271: //exact?
+					//yoshi enter
+				case 288:
+					//yoshi can hey
+				case 300:
+					setCamZoom(1.2, 0.4);
+				case 304:
+					setCamZoom(1.5, 0.4);
+				case 307:
+					setCamZoom(1.3, 0.4);
+				case 315:
+					setCamZoom(1.1, 0.4);
+				case 320:
+					setCamZoom(1.3, 0.4);
+				case 392:
+					//enter maki
+				case 420:
+					//maki can hey
+				case 427:
+					setCamZoom(1.2, 0.4);
+				case 432:
+					setCamZoom(1.5, 0.4);
+				case 435:
+					setCamZoom(1.4, 0.4);
+				case 444:
+					setCamZoom(1.2, 0.4);
+				case 448:
+					setCamZoom(1.3, 0.4);
+				case 543:
+					//maki can hey
+				case 544:
+					//yoshi can hey
+				case 607:
+					setCamZoom(1.5, 0.4);
+				case 615:
+					camFollowPosEV(860, 330);
+				case 623:
+					camFollowPosEV();
+				case 631:
+					camFollowPosEV(860, 330);
+				case 638:
+					camFollowPosEV();
+				case 639:
+					setCamZoom(1.3, 0.4);
+				case 735:
+					setCamZoom(1.5, 0.4);
+				case 743:
+					camFollowPosEV(540, 260);
+				case 751:
+					camFollowPosEV();
+				case 759:
+					camFollowPosEV(540, 260);
+				case 766:
+					setCamZoom(1.5, 0.4);
+				case 767:
+					camBoomSpeed(2, 2.3);
+				case 775:
+					setCamZoom(1.6, 0.4);
+				case 783:
+					setCamZoom(1.7, 0.4);
+				case 791:
+					setCamZoom(1.8, 0.4);
+				case 797:
+					camBoomSpeed(2,2);
+				case 798:
+					setCamZoom(1.3, 0.4);
+				case 799:
+					//can hey, yoshi, true
+				case 800:
+					//can hey, maki, true
+				case 801:
+					camFollowPosEV();
+				case 911:
+					setCamZoom(1.5, 0.4);
+				case 919:
+					setCamZoom(1.6, 0.4);
+				case 927:
+					setCamZoom(1.3, 0.4);
+				case 1023:
+					setCamZoom(1.5, 0.4);
+				case 1024:
+					camBoomSpeed(2,2);
+					dad.playAnim('gambare', true);
+					dad.specialAnim = true;
+				case 1027:
+					camBoomSpeed(2, 2.1);
+				case 1030:
+					setCamZoom(1.7, 0.4);
+				case 1031:
+					dad.playAnim('gambare', true);
+					dad.specialAnim = true;
+				case 1035:
+					camBoomSpeed(2, 2.2);
+				case 1038:
+					setCamZoom(1.9, 0.4);
+				case 1039:
+					dad.playAnim('sen', true);
+					dad.specialAnim = true;
+				case 1041:
+					//can hey maki
+				case 1042:
+					//can hey yoshi
+				case 1043:
+					camBoomSpeed(2,2.3);
+				case 1046:
+					setCamZoom(2.2, 0.4);
+				case 1047:
+					dad.playAnim('pai', true);
+					dad.specialAnim = true;
+				case 1051:
+					camBoomSpeed(2,2);
+				case 1053:
+					camFollowPosEV(430, 245);
+				case 1054:
+					setCamZoom(1.1, 0.4);
+				case 1055:
+					dad.playAnim('hey', true);
+					dad.specialAnim = true;
+					//heyo
+				case 1063:
+					setCamZoom(1.3, 0.8);
+				case 1071:
+					//can hey yoshi true
+				case 1072:
+					//can hey maki true
+				case 1075:
+					camFollowPosEV();
+				case 1277:
+					camFollowPosEV(900, 350);
+				case 1278:
+					setCamZoom(1.5, 0.4);
+				case 1279:
+					setCamZoom(1.5 ,0.4);
+				case 1287:
+					setCamZoom(1.7, 0.4);
+				case 1294:
+					setCamZoom(1.9, 0.4);
+				case 1295:
+					//can hey maki
+				case 1296:
+					//can key yoshic
+				case 1302:
+					setCamZoom(2.2, 0.4);
+			}
+		}
+
 		if(curStep == lastStepHit) {
 			return;
 		}
@@ -4080,53 +4237,32 @@ class PlayState extends MusicBeatState
 			dad.dance();
 		}
 
-		switch (curStage)
+		if(curStage == 'hallway')
 		{
-			case 'school':
-				if(!ClientPrefs.lowQuality) {
-					bgGirls.dance();
-				}
-
-			case 'mall':
-				if(!ClientPrefs.lowQuality) {
-					upperBoppers.dance(true);
-				}
-
-				if(heyTimer <= 0) bottomBoppers.dance(true);
-				santa.dance(true);
-
-			case 'limo':
-				if(!ClientPrefs.lowQuality) {
-					grpLimoDancers.forEach(function(dancer:BackgroundDancer)
-					{
-						dancer.dance();
-					});
-				}
-
-				if (FlxG.random.bool(10) && fastCarCanDrive)
-					fastCarDrive();
-			case "philly":
-				if (!trainMoving)
-					trainCooldown += 1;
-
-				if (curBeat % 4 == 0)
-				{
-					phillyCityLights.forEach(function(light:BGSprite)
-					{
-						light.visible = false;
-					});
-
-					curLight = FlxG.random.int(0, phillyCityLights.length - 1, [curLight]);
-
-					phillyCityLights.members[curLight].visible = true;
-					phillyCityLights.members[curLight].alpha = 1;
-				}
-
-				if (curBeat % 8 == 4 && FlxG.random.bool(30) && !trainMoving && trainCooldown > 8)
-				{
-					trainCooldown = FlxG.random.int(-4, 0);
-					trainStart();
-				}
+			/*
+			if(yoshi.animation.curAnim.name == "dance")
+			{
+				if(dancing_maki && makiOnScreen)
+					maki.animation.play('dance${curBeat % 4}');
+				if(dancing_yoshi && yoshiOnScreen)
+					yoshi.animation.play('dance${curBeat % 4}');
+			}*/
+			if(curBeat + 8 % 16 == 14)
+			{
+				if(yoshicanHey)
+					yoshi.animation.play('hey');
+				if(makicanHey)
+					maki.animation.play('hey');
+			}
+			if(curBeat + 8 % 16 == 0)
+			{
+				if(dancing_maki && makiOnScreen)
+					maki.animation.play('dance${curBeat % 4}');
+				if(dancing_yoshi && yoshiOnScreen)
+					yoshi.animation.play('dance${curBeat % 4}');
+			}
+			if(curBeat == 464)
+				camGame.visible = false;
 		}
 
 		if (curStage == 'spooky' && FlxG.random.bool(10) && curBeat > lightningStrikeBeat + lightningOffset)
@@ -4320,6 +4456,64 @@ class PlayState extends MusicBeatState
 		gf.visible = false;
 	}
 
+	function onUpdatePost()
+	{
+		yoshi.visible = yoshiOnScreen;
+		maki.visible = makiOnScreen;
+	}
+
+	var boomspeed:Float = 4;
+	var bam:Float = 1;
+
+	function addCamZoom(camZ:Float, hudZ:Float)
+	{
+		if(ClientPrefs.camZooms && FlxG.camera.zoom < 1.35)
+		{
+			if(Math.isNaN(camZ)) camZ = 0.015;
+			if(Math.isNaN(hudZ)) hudZ = 0.03;
+			FlxG.camera.zoom += camZ;
+			camHUD.zoom += hudZ;
+		}
+	}
+	function camBoomSpeed(speed:Float, intensity:Float)
+	{
+		boomspeed = speed;
+		bam = intensity;
+		if(curBeat % boomspeed == 0 && !endingSong)
+		{
+			addCamZoom(0.015*bam, 0.03*bam);
+			if(camGame.zoom >= 1.35)
+			{
+				camGame.zoom += 0.025*bam;
+				camHUD.zoom += 0.03*bam;
+			}
+		}
+	}
+	function setCamZoom(camZ:Float, ?idk:Float)
+	{
+		if(idk == null)
+		{
+			defaultCamZoom = camZ;
+		}
+		else
+		{
+			FlxTween.tween(camGame, {zoom: camZ}, idk, {ease: FlxEase.sineInOut, onComplete: Void -> {
+				defaultCamZoom = camGame.zoom;
+			}});
+		}
+	}
+	function camFollowPosEV(?x:Float, ?y:Float)
+	{
+		if(Math.isNaN(x)) x = 0;
+		if(Math.isNaN(y)) y = 0;
+		isCameraOnForcedPos = false;
+		if(!Math.isNaN(x) || !Math.isNaN(y))
+		{
+			camFollow.x = x;
+			camFollow.y = y;
+			isCameraOnForcedPos = true;	
+		}
+	}
 	var curLight:Int = 0;
 	var curLightEvent:Int = 0;
 }
