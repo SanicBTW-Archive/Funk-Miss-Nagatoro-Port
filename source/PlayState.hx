@@ -4467,6 +4467,7 @@ class PlayState extends MusicBeatState
 
 	function addCamZoom(camZ:Float, hudZ:Float)
 	{
+		trace("executing add cam zoom");
 		if(ClientPrefs.camZooms && FlxG.camera.zoom < 1.35)
 		{
 			if(Math.isNaN(camZ)) camZ = 0.015;
@@ -4477,6 +4478,7 @@ class PlayState extends MusicBeatState
 	}
 	function camBoomSpeed(speed:Float, intensity:Float)
 	{
+		trace("executing cam boom speed");
 		boomspeed = speed;
 		bam = intensity;
 		if(curBeat % boomspeed == 0 && !endingSong)
@@ -4491,6 +4493,7 @@ class PlayState extends MusicBeatState
 	}
 	function setCamZoom(camZ:Float, ?idk:Float)
 	{
+		trace("executing set cam zoom");
 		if(idk == null)
 		{
 			defaultCamZoom = camZ;
@@ -4504,6 +4507,7 @@ class PlayState extends MusicBeatState
 	}
 	function camFollowPosEV(?x:Float, ?y:Float)
 	{
+		trace("executing cam follow pos ev");
 		if(Math.isNaN(x)) x = 0;
 		if(Math.isNaN(y)) y = 0;
 		isCameraOnForcedPos = false;
